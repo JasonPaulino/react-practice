@@ -1,27 +1,27 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-key */
+import books from "../model";
+
 function BookList() {
   return (
-    <section className="book-list">
-      <Book
-        img="/public/giraffe.jpg"
-        title="There Are Moms Way Worse Than You: Irrefutable Proof That You Are Indeed a Fantastic Parent"
-        author="Gleen Boozaman"
-      />
-      <Book
-        img="/public/drSeuss.jpg"
-        title="Oh, the Places You'll Go!"
-        author="Dr. Seuss"
-      />
-    </section>
+    <>
+      <h1 className="book-list-title">Top Books</h1>
+      <section className="book-list">
+        {books.map((book, index) => {
+          return <Book {...book} key={book.id} number={index} />;
+        })}
+      </section>
+    </>
   );
 }
 
-function Book(props) {
+function Book({ img, title, author, number }) {
   return (
     <article className="book">
-      <img src={props.img} alt="" />
-      <h1>{props.title}</h1>
-      <h2>{props.author.toUpperCase()}</h2>
+      <img src={img} alt="" />
+      <h1>{title}</h1>
+      <h2>{author.toUpperCase()}</h2>
+      <span className="number">{`#${number + 1}`}</span>
     </article>
   );
 }
